@@ -20,41 +20,38 @@ import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
-import { v4 as uuidv4 } from 'uuid';
+import { v4 as uuidv4 } from "uuid";
 
 const onSubmit = async (data) => {
-    console.log(data);
-    // Object.assign(data, { gender: gender });
-    const {email, password} = data;
-    // setOpen(true);
+  console.log(data);
+  // Object.assign(data, { gender: gender });
+  const { email, password } = data;
+  // setOpen(true);
 
-    
- 
-const url = 'https://jwt-bearer-auth1.p.rapidapi.com/register';
+  const url = "https://jwt-bearer-auth1.p.rapidapi.com/register";
 
+  const options = {
+    method: "POST",
+    headers: {
+      "content-type": "application/json",
+      "Content-Type": "application/json",
+      "X-RapidAPI-Key": "bd61944afdmsh6605bfe1720e716p1bed45jsn5bdf57fe32dc",
+      "X-RapidAPI-Host": "jwt-bearer-auth1.p.rapidapi.com",
+    },
+    body: JSON.stringify({
+      email,
+      password,
+      role: uuidv4(),
+    }),
+  };
 
-const options = {
-  method: 'POST',
-  headers: {
-    'content-type': 'application/json',
-    'Content-Type': 'application/json',
-    'X-RapidAPI-Key': 'bd61944afdmsh6605bfe1720e716p1bed45jsn5bdf57fe32dc',
-    'X-RapidAPI-Host': 'jwt-bearer-auth1.p.rapidapi.com'
-  },
-  body: JSON.stringify({
-    email,
-    password,
-    role: uuidv4()
-})
-  
-};
-try {
-	const response = await fetch(url, options);
-	const result = await response.text();
-	console.log(result);
-} catch (error) {
-	console.error(error);
-}
+  try {
+    const response = await fetch(url, options);
+    const result = await response.text();
+    console.log(result);
+  } catch (error) {
+    console.error(error);
+  }
 };
 const schema = yup
   .object({
@@ -77,17 +74,17 @@ const darkTheme = createTheme({
 });
 
 const newcenter = {
-    display: "flex",
-    flexDirection: "column",
-    justifyContent: "center",
-    alignItems: "center",
-    backgroundSize: "cover",
-    height: "70vh",
-    minHeight: "500px",
-    backgroundColor: "#000000",
-    transition: "opacity 0.5s ease-in-out",
-    opacity: 1,
-}
+  display: "flex",
+  flexDirection: "column",
+  justifyContent: "center",
+  alignItems: "center",
+  backgroundSize: "cover",
+  height: "70vh",
+  minHeight: "500px",
+  backgroundColor: "#000000",
+  transition: "opacity 0.5s ease-in-out",
+  opacity: 1,
+};
 
 const boxstyle = {
   position: "absolute",
@@ -120,7 +117,6 @@ export default function Register() {
   } = useForm({
     resolver: yupResolver(schema),
   });
-
 
   const handleClose = (event, reason) => {
     if (reason === "clickaway") {
@@ -161,22 +157,28 @@ export default function Register() {
         <Box sx={boxstyle}>
           <Grid container>
             <Grid item xs={12} sm={12} lg={6}>
-            <Container>
-                    <Box height={-10} />
-                    <Box sx={newcenter} 
-                                    style={{
-                                        backgroundSize: "cover",
-                                        height: "70vh",
-                                        minHeight: "500px",
-                                        backgroundColor: "#000000",
-                                      }}>
-                    <Slide direction="down" in={true} timeout={500}>
-                      <Typography component="h1" variant="h1" style={{ color: "#ffffff", fontSize: "48px" }} >
-                        Welcome New Users!
-                      </Typography>
-                      </Slide>
-                    </Box>
-            </Container>
+              <Container>
+                <Box height={-10} />
+                <Box
+                  sx={newcenter}
+                  style={{
+                    backgroundSize: "cover",
+                    height: "70vh",
+                    minHeight: "500px",
+                    backgroundColor: "#000000",
+                  }}
+                >
+                  <Slide direction="down" in={true} timeout={500}>
+                    <Typography
+                      component="h1"
+                      variant="h1"
+                      style={{ color: "#ffffff", fontSize: "48px" }}
+                    >
+                      Welcome New Users!
+                    </Typography>
+                  </Slide>
+                </Box>
+              </Container>
             </Grid>
             <Grid item xs={12} sm={12} lg={6}>
               <Box
@@ -196,7 +198,7 @@ export default function Register() {
                       </Typography>
                     </Box>
                     <Box sx={{ mt: 2 }} />
-                    <form onSubmit={handleSubmit(onSubmit)} >
+                    <form onSubmit={handleSubmit(onSubmit)}>
                       <Grid container spacing={1}>
                         <Grid item xs={12}>
                           <TextField
@@ -207,7 +209,9 @@ export default function Register() {
                             name="username"
                           />
                           {errors.username && (
-                            <span style={{ color: "#f7d643", fontSize: "12px" }}>
+                            <span
+                              style={{ color: "#f7d643", fontSize: "12px" }}
+                            >
                               {errors.username?.message}
                             </span>
                           )}
@@ -224,7 +228,9 @@ export default function Register() {
                             aria-invalid={errors.email ? "true" : "false"}
                           />
                           {errors.email && (
-                            <span style={{ color: "#f7d643", fontSize: "12px" }}>
+                            <span
+                              style={{ color: "#f7d643", fontSize: "12px" }}
+                            >
                               {errors.email?.message}
                             </span>
                           )}
@@ -241,7 +247,9 @@ export default function Register() {
                             autoComplete="new-password"
                           />
                           {errors.password && (
-                            <span style={{ color: "#f7d643", fontSize: "12px" }}>
+                            <span
+                              style={{ color: "#f7d643", fontSize: "12px" }}
+                            >
                               {errors.password?.message}
                             </span>
                           )}
@@ -258,7 +266,9 @@ export default function Register() {
                             autoComplete="new-password"
                           />
                           {errors.password && (
-                            <span style={{ color: "#f7d643", fontSize: "12px" }}>
+                            <span
+                              style={{ color: "#f7d643", fontSize: "12px" }}
+                            >
                               {errors.confirmpassword?.message}
                             </span>
                           )}
@@ -273,7 +283,9 @@ export default function Register() {
                             size="small"
                           />
                           {errors.mobile && (
-                            <span style={{ color: "#f7d643", fontSize: "12px" }}>
+                            <span
+                              style={{ color: "#f7d643", fontSize: "12px" }}
+                            >
                               {errors.mobile?.message}
                             </span>
                           )}
@@ -297,13 +309,15 @@ export default function Register() {
                             </Select>
                           </FormControl>
                           {errors.gender && (
-                            <span style={{ color: "#f7d643", fontSize: "12px" }}>
+                            <span
+                              style={{ color: "#f7d643", fontSize: "12px" }}
+                            >
                               {errors.gender?.message}
                             </span>
                           )}
                         </Grid>
                         <Grid item xs={12} sx={{ ml: "5em", mr: "5em" }}>
-                          <Button 
+                          <Button
                             type="submit"
                             variant="contained"
                             fullWidth="true"
@@ -339,21 +353,21 @@ export default function Register() {
                             </Typography>
                           </Stack>
                           <Typography
-                              variant="body1"
-                              component="span"
-                              style={{ marginTop: "10px" }}
+                            variant="body1"
+                            component="span"
+                            style={{ marginTop: "10px" }}
+                          >
+                            Go back to Homepage --
+                            <span
+                              style={{ color: "#beb4fb", cursor: "pointer" }}
+                              onClick={() => {
+                                navigate("/");
+                              }}
                             >
-                              Go back to Homepage -- 
-                              <span
-                                style={{ color: "#beb4fb", cursor: "pointer" }}
-                                onClick={() => {
-                                  navigate("/");
-                                }}
-                              >
-                                {" "}
-                                Homepage
-                              </span>
-                            </Typography>
+                              {" "}
+                              Homepage
+                            </span>
+                          </Typography>
                         </Grid>
                       </Grid>
                     </form>

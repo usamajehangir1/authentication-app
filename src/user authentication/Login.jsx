@@ -19,7 +19,6 @@ import Slide from "@mui/material/Slide";
 import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 
-
 const Alert = forwardRef(function Alert(props, ref) {
   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
 });
@@ -48,17 +47,17 @@ const center = {
 };
 
 const newcenter = {
-    display: "flex",
-    flexDirection: "column",
-    justifyContent: "center",
-    alignItems: "center",
-    backgroundSize: "cover",
-    height: "70vh",
-    minHeight: "500px",
-    backgroundColor: "#000000",
-    transition: "opacity 0.5s ease-in-out",
-    opacity: 1,
-}
+  display: "flex",
+  flexDirection: "column",
+  justifyContent: "center",
+  alignItems: "center",
+  backgroundSize: "cover",
+  height: "70vh",
+  minHeight: "500px",
+  backgroundColor: "#000000",
+  transition: "opacity 0.5s ease-in-out",
+  opacity: 1,
+};
 
 export default function Login() {
   const [open, setOpen] = useState(false);
@@ -76,39 +75,36 @@ export default function Login() {
 
   const onSubmit = async (data) => {
     console.log(data);
-    const {email, password} = data;
-    const url = 'https://jwt-bearer-auth1.p.rapidapi.com/login';
+    const { email, password } = data;
+    const url = "https://jwt-bearer-auth1.p.rapidapi.com/login";
     const options = {
-        method: 'POST',
-        headers: {
-            'content-type': 'application/json',
-            'Content-Type': 'application/json',
-            'X-RapidAPI-Key': 'bd61944afdmsh6605bfe1720e716p1bed45jsn5bdf57fe32dc',
-            'X-RapidAPI-Host': 'jwt-bearer-auth1.p.rapidapi.com'
-        },
-        body: JSON.stringify({
-            email,
-            password
-        })   
-    }
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+        "Content-Type": "application/json",
+        "X-RapidAPI-Key": "bd61944afdmsh6605bfe1720e716p1bed45jsn5bdf57fe32dc",
+        "X-RapidAPI-Host": "jwt-bearer-auth1.p.rapidapi.com",
+      },
+      body: JSON.stringify({
+        email,
+        password,
+      }),
+    };
 
     try {
-        const response = await fetch(url, options);
-        const result = await response.text();
-        const data = JSON.parse(result);
-        const token = data.token;
-        localStorage.setItem("token", token);
-        if(token){
-            setOpen(true);    
-            navigate("/LoggedIn")
-        }
+      const response = await fetch(url, options);
+      const result = await response.text();
+      const data = JSON.parse(result);
+      const token = data.token;
+      localStorage.setItem("token", token);
+      if (token) {
+        setOpen(true);
+        navigate("/LoggedIn");
+      }
     } catch (error) {
-	    console.error(error);
+      console.error(error);
     }
-}
-
-    
-    
+  };
 
   const handleClose = (event, reason) => {
     if (reason === "clickaway") {
@@ -143,34 +139,40 @@ export default function Login() {
         }}
       >
         <Box sx={boxstyle}>
-        <Grid container>
-            <Grid item xs={12} sm={12} lg={6}> 
-            <Container>
-                    <Box height={-10} />
-                    <Box sx={newcenter} 
-                                    style={{
-                                        backgroundSize: "cover",
-                                        height: "70vh",
-                                        minHeight: "500px",
-                                        backgroundColor: "#000000",
-                                      }}>
-                    <Slide direction="right" in={true} timeout={500}>
-                      <Typography component="h1" variant="h1" style={{ color: "#ffffff", fontSize: "38px" }} >
-                        Welcome Back, Login 
-                      </Typography>
-                      </Slide>
-                    </Box>
-            </Container>
+          <Grid container>
+            <Grid item xs={12} sm={12} lg={6}>
+              <Container>
+                <Box height={-10} />
+                <Box
+                  sx={newcenter}
+                  style={{
+                    backgroundSize: "cover",
+                    height: "70vh",
+                    minHeight: "500px",
+                    backgroundColor: "#000000",
+                  }}
+                >
+                  <Slide direction="right" in={true} timeout={500}>
+                    <Typography
+                      component="h1"
+                      variant="h1"
+                      style={{ color: "#ffffff", fontSize: "38px" }}
+                    >
+                      Welcome Back, Login
+                    </Typography>
+                  </Slide>
+                </Box>
+              </Container>
             </Grid>
             <Grid item xs={12} sm={12} lg={6}>
-              <Box 
+              <Box
                 style={{
                   backgroundSize: "cover",
                   height: "70vh",
                   minHeight: "500px",
                   backgroundColor: "#000000",
                 }}
-                >
+              >
                 <ThemeProvider theme={darkTheme}>
                   <Container>
                     <Box height={35} />
@@ -282,21 +284,21 @@ export default function Login() {
                             </Typography>
                           </Stack>
                           <Typography
-                              variant="body1"
-                              component="span"
-                              style={{ marginTop: "10px" }}
+                            variant="body1"
+                            component="span"
+                            style={{ marginTop: "10px" }}
+                          >
+                            Go back to Homepage --
+                            <span
+                              style={{ color: "#beb4fb", cursor: "pointer" }}
+                              onClick={() => {
+                                navigate("/");
+                              }}
                             >
-                              Go back to Homepage -- 
-                              <span
-                                style={{ color: "#beb4fb", cursor: "pointer" }}
-                                onClick={() => {
-                                  navigate("/");
-                                }}
-                              >
-                                {" "}
-                                Homepage
-                              </span>
-                            </Typography>
+                              {" "}
+                              Homepage
+                            </span>
+                          </Typography>
                         </Grid>
                       </Grid>
                     </form>

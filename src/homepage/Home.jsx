@@ -1,14 +1,15 @@
-import ResponsiveAppBar from './components/Header';
-import React from 'react';
-import ImgMediaCard from './components/Card'
-import Mainpage from './components/Mainpage';
-
-
+import ResponsiveAppBar from "./components/Header";
+import React from "react";
+import Mainpage from "./components/Mainpage";
+import ProductPage from "../products/ProductPage";
 
 function Home() {
-    return (
-        <><ResponsiveAppBar /><Mainpage /> <ImgMediaCard /></>
-    )
-  }
-  
-  export default Home;
+  return (
+    <>
+      <ResponsiveAppBar />
+      <Mainpage /> <ProductPage />
+    </>
+  );
+}
+
+export default Home;

@@ -1,17 +1,23 @@
-import React, { useState } from 'react';
-import Typography from '@mui/material/Typography';
-import Button from '@mui/material/Button';
-import Box from '@mui/material/Box';
+import React, { useState } from "react";
+import Typography from "@mui/material/Typography";
+import Button from "@mui/material/Button";
+import Box from "@mui/material/Box";
 import { useNavigate } from "react-router-dom";
+import PaymentForm from "../payment/PaymentForm";
+import { Elements } from "@stripe/react-stripe-js";
+import { loadStripe } from "@stripe/stripe-js";
 
+const stripePromise = loadStripe(
+  "pk_test_51ObKHJKtMZDHrwRuZeUnnHEPk2YVOiULNUya2iRp7flNyeboDcxojifgs4XeYQSitB7HQYYlY9BVjkhAJEpSJm8K00IVqLlNSe"
+);
 
 const LoggedIn = () => {
   const [authenticated, setAuthenticated] = useState(true);
   const navigate = useNavigate();
 
   const handleLogout = () => {
-    localStorage.removeItem("token")
-    navigate("/Login")
+    localStorage.removeItem("token");
+    navigate("/Login");
   };
 
   return (
@@ -27,7 +33,24 @@ const LoggedIn = () => {
           <Typography variant="h4" align="center">
             You are now successfully logged in!
           </Typography>
-          <Button variant="contained" color="primary" onClick={handleLogout} >
+
+          <Typography variant="h6" mt={2} mb={2} align="center">
+            Enter your card details for buying the car!
+          </Typography>
+
+          <Elements stripe={stripePromise}>
+            <PaymentForm />
+          </Elements>
+          <>
+            <li></li>
+          </>
+          <>
+            <li></li>
+          </>
+          <>
+            <li></li>
+          </>
+          <Button variant="contained" color="primary" onClick={handleLogout}>
             Logout
           </Button>
         </div>
