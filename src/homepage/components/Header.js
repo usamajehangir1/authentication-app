@@ -13,7 +13,7 @@ import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import { createTheme } from "@mui/material/styles";
 import { useNavigate } from "react-router-dom";
-import DirectionsCarFilledOutlinedIcon from "@mui/icons-material/DirectionsCarFilledOutlined";
+import WorkOutlineOutlinedIcon from "@mui/icons-material/WorkOutlineOutlined";
 
 const pages = ["Sign In", "Sign Up", "Forgot Password"];
 const settings = ["Sign In", "Sign Up", "Forgot Password"];
@@ -58,7 +58,7 @@ function ResponsiveAppBar() {
     >
       <Container maxWidth="xl">
         <Toolbar disableGutters>
-          <DirectionsCarFilledOutlinedIcon
+          <WorkOutlineOutlinedIcon
             sx={{ display: { xs: "none", md: "flex" }, mr: 1 }}
           />
           <Typography
@@ -76,7 +76,7 @@ function ResponsiveAppBar() {
               textDecoration: "none",
             }}
           >
-            Cars Hub
+            Services Portal
           </Typography>
 
           <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
@@ -115,7 +115,7 @@ function ResponsiveAppBar() {
               ))}
             </Menu>
           </Box>
-          <DirectionsCarFilledOutlinedIcon
+          <WorkOutlineOutlinedIcon
             sx={{ display: { xs: "flex", md: "none" }, mr: 1 }}
           />
           <Typography

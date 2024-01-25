@@ -12,7 +12,7 @@ function Mainpage() {
     >
       <Slide direction="left" in={true} timeout={500}>
         <Typography variant="h1" gutterBottom>
-          Welcome to Cars Hub
+          Welcome to Services Portal
         </Typography>
       </Slide>
     </Grid>

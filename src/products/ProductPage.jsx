@@ -82,7 +82,7 @@ const ProductPage = () => {
   return (
     <Container maxWidth="lg" style={{ marginTop: "20px" }}>
       <Typography variant="h4" gutterBottom>
-        Available Cars are Below!
+        Available Services are Below!
       </Typography>
       <Grid container spacing={3}>
         {products.map((product) => (
@@ -101,6 +101,7 @@ const ProductPage = () => {
                 </Typography>
                 <Typography variant="h6">
                   ${product.price.toFixed(2)}
+                  /per Hour
                 </Typography>
               </CardContent>
               <CardContent>
@@ -109,7 +110,7 @@ const ProductPage = () => {
                   color="primary"
                   onClick={handleBuyNow}
                 >
-                  Buy Now
+                  Subscribe
                 </Button>
               </CardContent>
             </Card>
