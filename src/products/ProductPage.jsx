@@ -80,11 +80,11 @@ const ProductPage = () => {
   };
 
   return (
-    <Container maxWidth="lg" style={{ marginTop: "20px" }}>
+    <Container maxWidth="lg" style={{ marginTop: "70px" }}>
       <Typography variant="h4" gutterBottom>
         Available Services are Below!
       </Typography>
-      <Grid container spacing={3}>
+      <Grid container spacing={10}>
         {products.map((product) => (
           <Grid item xs={12} sm={6} md={4} key={product.id}>
             <Card>

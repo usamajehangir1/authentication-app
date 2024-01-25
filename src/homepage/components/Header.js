@@ -15,7 +15,7 @@ import { createTheme } from "@mui/material/styles";
 import { useNavigate } from "react-router-dom";
 import WorkOutlineOutlinedIcon from "@mui/icons-material/WorkOutlineOutlined";
 
-const pages = ["Sign In", "Sign Up", "Forgot Password"];
+const pages = ["Home", "About", "Contact Us"];
 const settings = ["Sign In", "Sign Up", "Forgot Password"];
 
 const darkTheme = createTheme({
