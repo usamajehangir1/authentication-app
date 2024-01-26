@@ -6,9 +6,7 @@ import { Link } from "react-router-dom";
 
 function Mainpage() {
   const handleLogout = () => {
-    // Clear the token from localStorage and update isLoggedIn state
     localStorage.removeItem("token");
-    // setIsLoggedIn(false);
   };
 
   return (

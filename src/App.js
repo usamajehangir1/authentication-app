@@ -11,6 +11,8 @@ import ProductPage from "./products/ProductPage";
 import ProductDetails from "./products/ProductDetails";
 import AboutUsPage from "./aboutus/AboutUs";
 import ContactUsForm from "./contactus/ContactUs";
+import SignupForm from "./user authentication/SignUp";
+
 export default function App() {
   return (
     <>
@@ -22,6 +24,7 @@ export default function App() {
           <Route path="/product/:productId" element={<ProductDetails />} />
           <Route path="/aboutus/AboutUs" element={<AboutUsPage />} />
           <Route path="/contactus/ContactUs" element={<ContactUsForm />} />
+          <Route path="/SignUp" element={<SignupForm />} />
 
           <Route
             path="/loggedin"

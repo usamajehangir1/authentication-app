@@ -14,6 +14,8 @@ import { createTheme } from "@mui/material/styles";
 import { useNavigate } from "react-router-dom";
 import WorkOutlineOutlinedIcon from "@mui/icons-material/WorkOutlineOutlined";
 import PersonOutlineOutlinedIcon from "@mui/icons-material/PersonOutlineOutlined";
+import Cart from "./Cart";
+import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
 
 const pages = ["Home", "About", "Contact Us"];
 const settingsLogin = ["Sign In", "Sign Up", "Forgot Password"];
@@ -36,13 +38,12 @@ function ResponsiveAppBar() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    // Check if the user is already logged in (by checking localStorage)
     console.log(isLoggedIn);
     if (token) {
       setIsLoggedIn(true);
     }
     console.log(isLoggedIn);
-  }, [token]); // Empty dependency array ensures this effect runs only once, on component mount
+  }, [token]);
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -65,7 +66,6 @@ function ResponsiveAppBar() {
     } else if (setting === "Forgot Password") {
       navigate("/reset-password");
     } else if (setting == "Logout") {
-      console.log("usama");
       localStorage.removeItem("token");
       setIsLoggedIn(false);
     }
@@ -183,6 +183,7 @@ function ResponsiveAppBar() {
                 <PersonOutlineOutlinedIcon></PersonOutlineOutlinedIcon>
               </IconButton>
             </Tooltip>
+
             <Menu
               sx={{ mt: "45px" }}
               id="menu-appbar"
@@ -200,8 +201,7 @@ function ResponsiveAppBar() {
               onClose={handleCloseUserMenu}
             >
               {isLoggedIn
-                ? // Render the menu items when the user is logged in
-                  settingsLogout.map((setting) => (
+                ? settingsLogout.map((setting) => (
                     <MenuItem
                       key={setting}
                       onClick={() => handleCloseUserMenu(setting)}
@@ -219,6 +219,7 @@ function ResponsiveAppBar() {
                   ))}
             </Menu>
           </Box>
+          <ShoppingCartOutlinedIcon color="primary" onClick={() => Cart()} />
         </Toolbar>
       </Container>
     </AppBar>
