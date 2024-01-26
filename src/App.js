@@ -5,9 +5,12 @@ import Login from "./user authentication/Login";
 import Register from "./user authentication/Register";
 import ForgotPassword from "./user authentication/ForgotPassword";
 import Home from "./homepage/Home";
-import LoggedIn11111 from "./user authentication/LoggedIn";
+import LoggedIn from "./user authentication/LoggedIn";
 import ProtectedRoute from "./components/ProtectedRoute";
-
+import ProductPage from "./products/ProductPage";
+import ProductDetails from "./products/ProductDetails";
+import AboutUsPage from "./aboutus/AboutUs";
+import ContactUsForm from "./contactus/ContactUs";
 export default function App() {
   return (
     <>
@@ -16,9 +19,13 @@ export default function App() {
           <Route path="/" exact element={<Home />}></Route>
           <Route path="/register" exact element={<Register />}></Route>
           <Route path="/login" exact element={<Login />}></Route>
+          <Route path="/product/:productId" element={<ProductDetails />} />
+          <Route path="/aboutus/AboutUs" element={<AboutUsPage />} />
+          <Route path="/contactus/ContactUs" element={<ContactUsForm />} />
+
           <Route
             path="/loggedin"
-            element={<ProtectedRoute element={<LoggedIn11111 />} />}
+            element={<ProtectedRoute element={<LoggedIn />} />}
           />
           <Route
             path="/reset-password"

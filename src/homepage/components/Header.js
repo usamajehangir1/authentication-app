@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
@@ -7,16 +7,17 @@ import Typography from "@mui/material/Typography";
 import Menu from "@mui/material/Menu";
 import MenuIcon from "@mui/icons-material/Menu";
 import Container from "@mui/material/Container";
-import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import { createTheme } from "@mui/material/styles";
 import { useNavigate } from "react-router-dom";
 import WorkOutlineOutlinedIcon from "@mui/icons-material/WorkOutlineOutlined";
+import PersonOutlineOutlinedIcon from "@mui/icons-material/PersonOutlineOutlined";
 
 const pages = ["Home", "About", "Contact Us"];
-const settings = ["Sign In", "Sign Up", "Forgot Password"];
+const settingsLogin = ["Sign In", "Sign Up", "Forgot Password"];
+const settingsLogout = ["Logout"];
 
 const darkTheme = createTheme({
   palette: {
@@ -30,10 +31,23 @@ const darkTheme = createTheme({
 function ResponsiveAppBar() {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [token, setToken] = useState(localStorage.getItem("token"));
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    // Check if the user is already logged in (by checking localStorage)
+    console.log(isLoggedIn);
+    if (token) {
+      setIsLoggedIn(true);
+    }
+    console.log(isLoggedIn);
+  }, [token]); // Empty dependency array ensures this effect runs only once, on component mount
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
   };
+
   const handleOpenUserMenu = (event) => {
     setAnchorElUser(event.currentTarget);
   };
@@ -42,11 +56,20 @@ function ResponsiveAppBar() {
     setAnchorElNav(null);
   };
 
-  const handleCloseUserMenu = () => {
+  const handleCloseUserMenu = (setting) => {
     setAnchorElUser(null);
+    if (setting === "Sign In") {
+      navigate("/Login");
+    } else if (setting === "Sign Up") {
+      navigate("/Register");
+    } else if (setting === "Forgot Password") {
+      navigate("/reset-password");
+    } else if (setting == "Logout") {
+      console.log("usama");
+      localStorage.removeItem("token");
+      setIsLoggedIn(false);
+    }
   };
-
-  const navigate = useNavigate();
 
   return (
     <AppBar
@@ -139,12 +162,12 @@ function ResponsiveAppBar() {
               <Button
                 key={page}
                 onClick={() => {
-                  if (page === "Sign In") {
-                    navigate("/Login");
-                  } else if (page === "Sign Up") {
-                    navigate("/Register");
-                  } else if (page === "Forgot Password") {
-                    navigate("/reset-password");
+                  if (page === "Home") {
+                    navigate("/");
+                  } else if (page === "About") {
+                    navigate("/aboutus/AboutUs");
+                  } else if (page === "Contact Us") {
+                    navigate("/contactus/ContactUs");
                   }
                 }}
                 sx={{ my: 2, color: "white", display: "block" }}
@@ -155,9 +178,9 @@ function ResponsiveAppBar() {
           </Box>
 
           <Box sx={{ flexGrow: 0 }}>
-            <Tooltip title="Open settings">
+            <Tooltip title="Login">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar sx={{ bgcolor: "#000000" }}>UJ</Avatar>
+                <PersonOutlineOutlinedIcon></PersonOutlineOutlinedIcon>
               </IconButton>
             </Tooltip>
             <Menu
@@ -176,11 +199,24 @@ function ResponsiveAppBar() {
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}
             >
-              {settings.map((setting) => (
-                <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                  <Typography textAlign="center">{setting}</Typography>
-                </MenuItem>
-              ))}
+              {isLoggedIn
+                ? // Render the menu items when the user is logged in
+                  settingsLogout.map((setting) => (
+                    <MenuItem
+                      key={setting}
+                      onClick={() => handleCloseUserMenu(setting)}
+                    >
+                      <Typography textAlign="center">{setting}</Typography>
+                    </MenuItem>
+                  ))
+                : settingsLogin.map((setting) => (
+                    <MenuItem
+                      key={setting}
+                      onClick={() => handleCloseUserMenu(setting)}
+                    >
+                      <Typography textAlign="center">{setting}</Typography>
+                    </MenuItem>
+                  ))}
             </Menu>
           </Box>
         </Toolbar>

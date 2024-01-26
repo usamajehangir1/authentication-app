@@ -8,7 +8,7 @@ import {
   Container,
   Button,
 } from "@mui/material";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const ProductPage = () => {
   const [products, setProducts] = useState([]);
@@ -30,31 +30,7 @@ const ProductPage = () => {
         );
 
         const data = await response.json();
-
-        const productsWithDetails = await Promise.all(
-          data.data.map(async (product) => {
-            const priceResponse = await fetch(
-              `https://api.stripe.com/v1/prices?product=${product.id}`,
-              {
-                headers: {
-                  Authorization: `Bearer sk_test_51ObKHJKtMZDHrwRuYGMuTA9PtN9HHUe6S49TtO0bJSNVfjcOLGIq9f3ksl59qM2VPX6RXopTDSpJl46bWhjj1uIb00G67Csk2B`,
-                },
-              }
-            );
-
-            const priceData = await priceResponse.json();
-
-            return {
-              id: product.id,
-              name: product.name,
-              description: product.description,
-              price: priceData.data[0]?.unit_amount / 100 || 0,
-              image: product.images[0],
-            };
-          })
-        );
-
-        setProducts(productsWithDetails);
+        setProducts(data.data);
       } catch (error) {
         console.error("Error fetching products:", error.message);
       }
@@ -63,8 +39,7 @@ const ProductPage = () => {
     fetchProducts();
   }, [currentPage]);
 
-  const totalProducts = 7; // Update this with the total number of products
-
+  const totalProducts = 7;
   const totalPages = Math.ceil(totalProducts / productsPerPage);
 
   const handlePagination = (newPage) => {
@@ -87,33 +62,37 @@ const ProductPage = () => {
       <Grid container spacing={10}>
         {products.map((product) => (
           <Grid item xs={12} sm={6} md={4} key={product.id}>
-            <Card>
-              <CardMedia
-                component="img"
-                height="140"
-                image={product.image}
-                alt={product.name}
-              />
-              <CardContent>
-                <Typography variant="h6">{product.name}</Typography>
-                <Typography variant="body2" color="textSecondary">
-                  {product.description}
-                </Typography>
-                <Typography variant="h6">
-                  ${product.price.toFixed(2)}
-                  /per Hour
-                </Typography>
-              </CardContent>
-              <CardContent>
-                <Button
-                  variant="contained"
-                  color="primary"
-                  onClick={handleBuyNow}
-                >
-                  Subscribe
-                </Button>
-              </CardContent>
-            </Card>
+            <Link
+              to={`/product/${product.id}`}
+              style={{ textDecoration: "none" }}
+            >
+              <Card>
+                <CardMedia
+                  component="img"
+                  height="140"
+                  image={product.images[0]}
+                  alt={product.name}
+                />
+                <CardContent>
+                  <Typography variant="h6">{product.name}</Typography>
+                  <Typography variant="body2" color="textSecondary">
+                    {product.description}
+                  </Typography>
+                  <Typography variant="h6">
+                    {/* Add the price or any other details here */}
+                  </Typography>
+                </CardContent>
+                <CardContent>
+                  <Button
+                    variant="contained"
+                    color="primary"
+                    onClick={handleBuyNow}
+                  >
+                    Subscribe
+                  </Button>
+                </CardContent>
+              </Card>
+            </Link>
           </Grid>
         ))}
       </Grid>

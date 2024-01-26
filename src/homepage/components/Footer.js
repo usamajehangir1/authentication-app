@@ -17,7 +17,7 @@ const Footer = () => {
   const navigate = useNavigate();
 
   const handleContactUs = () => {
-    navigate("/contactform");
+    navigate("/contactus/ContactUs");
   };
 
   return (
